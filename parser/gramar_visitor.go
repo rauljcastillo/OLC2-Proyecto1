@@ -29,12 +29,6 @@ type GramarVisitor interface {
 	// Visit a parse tree produced by GramarParser#pllamada.
 	VisitPllamada(ctx *PllamadaContext) interface{}
 
-	// Visit a parse tree produced by GramarParser#parguments.
-	VisitParguments(ctx *PargumentsContext) interface{}
-
-	// Visit a parse tree produced by GramarParser#pargum.
-	VisitPargum(ctx *PargumContext) interface{}
-
 	// Visit a parse tree produced by GramarParser#pparams.
 	VisitPparams(ctx *PparamsContext) interface{}
 
@@ -80,6 +74,9 @@ type GramarVisitor interface {
 	// Visit a parse tree produced by GramarParser#prin.
 	VisitPrin(ctx *PrinContext) interface{}
 
+	// Visit a parse tree produced by GramarParser#cexpr.
+	VisitCexpr(ctx *CexprContext) interface{}
+
 	// Visit a parse tree produced by GramarParser#declara.
 	VisitDeclara(ctx *DeclaraContext) interface{}
 
@@ -91,6 +88,12 @@ type GramarVisitor interface {
 
 	// Visit a parse tree produced by GramarParser#pespecial.
 	VisitPespecial(ctx *PespecialContext) interface{}
+
+	// Visit a parse tree produced by GramarParser#argumento.
+	VisitArgumento(ctx *ArgumentoContext) interface{}
+
+	// Visit a parse tree produced by GramarParser#tipoArg.
+	VisitTipoArg(ctx *TipoArgContext) interface{}
 
 	// Visit a parse tree produced by GramarParser#Op.
 	VisitOp(ctx *OpContext) interface{}
@@ -112,4 +115,7 @@ type GramarVisitor interface {
 
 	// Visit a parse tree produced by GramarParser#Paren.
 	VisitParen(ctx *ParenContext) interface{}
+
+	// Visit a parse tree produced by GramarParser#Embebida.
+	VisitEmbebida(ctx *EmbebidaContext) interface{}
 }

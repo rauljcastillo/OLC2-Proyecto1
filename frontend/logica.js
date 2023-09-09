@@ -13,14 +13,6 @@ const editor1 = CodeMirror.fromTextArea(document.getElementById("salida"), {
     mode: "text"
 })
 editor1.options.readOnly=true;
-document.getElementById("home").addEventListener("click", () => {
-    document.querySelector(".home").style.display = "flex";
-    document.querySelector(".main").style.display = "none";
-    document.querySelector(".Reportes").style.display = "none";
-    document.getElementById("container-graph").style.display="none";
-    document.getElementById("table").style.display="none"
-    document.getElementById("tree").style.display="none"
-})
 
 document.getElementById("editor").addEventListener("click", () => {
     document.querySelector(".home").style.display = "none";
@@ -72,9 +64,10 @@ document.getElementById("ejecutar").addEventListener("click",()=>{
     })
     .then(respuesta => respuesta.json())
     .then(datos => {
-        editor1.setValue(datos.valor)
-        this.graficarT(datos.table)
-        this.graficarAST(datos.tree)
+        let cadena=datos.texto+datos.errores+datos.sintax
+        editor1.setValue(cadena)
+        //this.graficarT(datos.table)
+        //this.graficarAST(datos.tree)
     })
     .catch(error => console.log(error));
     

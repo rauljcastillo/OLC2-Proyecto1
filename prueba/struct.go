@@ -74,10 +74,12 @@ func (l *Visitor) Visit(tree antlr.ParseTree, entorno *Ambiente) interface{} {
 		return l.VisitPllamada(val, entorno)
 	case *parser.PparamsContext:
 		return l.VisitPparams(val, entorno)
-	case *parser.PargumentsContext:
-		return l.VisitParguments(val, entorno)
-	case *parser.PargumContext:
-		return l.VisitPargum(val, entorno)
+	case *parser.EmbebidaContext:
+		return l.VisitEmbebida(val, entorno)
+	case *parser.ArgumentoContext:
+		return l.VisitArgumento(val, entorno)
+	case *parser.TipoArgContext:
+		return l.VisitTipoArg(val, entorno)
 	case *parser.PparametContext:
 		return l.VisitPparamet(val, entorno)
 	case *parser.PasignAContext:
@@ -88,6 +90,9 @@ func (l *Visitor) Visit(tree antlr.ParseTree, entorno *Ambiente) interface{} {
 		return l.VisitLlamada(val, entorno)
 	case *parser.PreturnContext:
 		return l.VisitPreturn(val, entorno)
+	case *parser.CexprContext:
+		return l.VisitCexpr(val, entorno)
+
 	}
 
 	return Valor{val: int64(0), tipo: INT}

@@ -11,15 +11,18 @@ type Temporal struct {
 }
 
 func (l *Visitor) VisitPfor(ctx *parser.PforContext, entorno *Ambiente) interface{} {
-	ambiente := NewAmbiente(entorno)
 	a := l.Visit(ctx.Pifor(), entorno)
+	ambiente := NewAmbiente(entorno)
+
 	if val, ok := a.(Temporal); ok {
 		ambiente.save(INT, ctx.ID().GetText(), nil, "")
 		for i := val.a; i <= val.b; i++ {
-			ambiente.updateVar(ctx.ID().GetText(), int64(i))
-			a := l.Visit(ctx.Block(), ambiente).(Sentences)
-			if a.val == BRK {
-				break
+			ambiente1 := NewAmbiente(ambiente)
+			ambiente1.updateVar(ctx.ID().GetText(), int64(i))
+			if a, ok := l.Visit(ctx.Block(), ambiente1).(Sentences); ok {
+				if a.val == BRK {
+					break
+				}
 			}
 		}
 	} else if value, ok := a.(Valor); ok {
@@ -58,7 +61,7 @@ func (l *Visitor) VisitPfor(ctx *parser.PforContext, entorno *Ambiente) interfac
 					}
 				}
 			}
-		} else if value.tipo == STRING {
+		} else {
 			ambiente.save(CHAR, ctx.ID().GetText(), nil, "")
 			for _, a := range value.val.(string) {
 				ambiente.updateVar(ctx.ID().GetText(), string(a))

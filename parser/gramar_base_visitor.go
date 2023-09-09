@@ -36,14 +36,6 @@ func (v *BaseGramarVisitor) VisitPllamada(ctx *PllamadaContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseGramarVisitor) VisitParguments(ctx *PargumentsContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseGramarVisitor) VisitPargum(ctx *PargumContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
 func (v *BaseGramarVisitor) VisitPparams(ctx *PparamsContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -104,6 +96,10 @@ func (v *BaseGramarVisitor) VisitPrin(ctx *PrinContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseGramarVisitor) VisitCexpr(ctx *CexprContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseGramarVisitor) VisitDeclara(ctx *DeclaraContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -117,6 +113,14 @@ func (v *BaseGramarVisitor) VisitTipo(ctx *TipoContext) interface{} {
 }
 
 func (v *BaseGramarVisitor) VisitPespecial(ctx *PespecialContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseGramarVisitor) VisitArgumento(ctx *ArgumentoContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseGramarVisitor) VisitTipoArg(ctx *TipoArgContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -145,5 +149,9 @@ func (v *BaseGramarVisitor) VisitEspecial(ctx *EspecialContext) interface{} {
 }
 
 func (v *BaseGramarVisitor) VisitParen(ctx *ParenContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseGramarVisitor) VisitEmbebida(ctx *EmbebidaContext) interface{} {
 	return v.VisitChildren(ctx)
 }

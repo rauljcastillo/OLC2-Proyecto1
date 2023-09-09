@@ -18,7 +18,7 @@ func (l *Visitor) VisitPdeclarArray(ctx *parser.PdeclarArrayContext, entorno *Am
 					nuevo = append(nuevo, el)
 				} else {
 					l.Errores = append(l.Errores, Error{mensaje: "El arreglo es de tipo INT"})
-					return 0
+					return Valor{}
 				}
 
 			}
@@ -77,10 +77,8 @@ func (l *Visitor) VisitPdefinition(ctx *parser.PdefinitionContext, entorno *Ambi
 
 	if ctx.GetChildCount() > 1 {
 		var array []string
-
-		temp := strings.Split(ctx.Expr(0).GetText(), ",")
-		for _, elem := range temp {
-			array = append(array, strings.ReplaceAll(elem, "\"", ""))
+		for _, elem := range ctx.AllExpr() {
+			array = append(array, strings.ReplaceAll(elem.GetText(), "\"", ""))
 		}
 
 		return array

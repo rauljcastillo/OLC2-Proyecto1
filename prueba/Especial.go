@@ -153,20 +153,20 @@ func (l *Visitor) VisitEspecial(ctx *parser.EspecialContext, entorno *Ambiente) 
 		if temp.temporal != "" {
 			variabTemp := temp.val.(*Ambiente).getVar(temp.temporal).(Valor)
 			if variabTemp.tipo == INT {
-				return Valor{val: len(variabTemp.val.([]int64)), tipo: INT}
+				return Valor{val: int64(len(variabTemp.val.([]int64))), tipo: INT}
 			} else if variabTemp.tipo == FLOAT {
-				return Valor{val: len(variabTemp.val.([]float64)), tipo: INT}
+				return Valor{val: int64(len(variabTemp.val.([]float64))), tipo: INT}
 			} else if variabTemp.tipo == STRING {
-				return Valor{val: len(variabTemp.val.([]string)), tipo: INT}
+				return Valor{val: int64(len(variabTemp.val.([]string))), tipo: INT}
 			}
 			return 0
 		}
 		if temp.tipo == INT {
-			return Valor{val: len(temp.val.([]int64)), tipo: INT}
+			return Valor{val: int64(len(temp.val.([]int64))), tipo: INT}
 		} else if temp.tipo == FLOAT {
-			return Valor{val: len(temp.val.([]float64)), tipo: INT}
+			return Valor{val: int64(len(temp.val.([]float64))), tipo: INT}
 		} else if temp.tipo == STRING {
-			return Valor{val: len(temp.val.([]string)), tipo: INT}
+			return Valor{val: int64(len(temp.val.([]string))), tipo: INT}
 		}
 	}
 

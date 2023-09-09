@@ -6,11 +6,13 @@ func (l *Visitor) VisitPwhile(ctx *parser.PwhileContext, entorno *Ambiente) inte
 	nuevoAmb := NewAmbiente(entorno)
 	exp := l.Visit(ctx.Expr(), nuevoAmb).(Valor)
 	for exp.val.(bool) {
-		a := l.Visit(ctx.Block(), nuevoAmb).(Sentences)
-		if a.val == BRK {
-			break
+		nuevoAmb1 := NewAmbiente(nuevoAmb)
+		if value, ok := l.Visit(ctx.Block(), nuevoAmb1).(Sentences); ok {
+			if value.val == BRK {
+				break
+			}
 		}
-		exp = l.Visit(ctx.Expr(), nuevoAmb).(Valor)
+		exp = l.Visit(ctx.Expr(), nuevoAmb1).(Valor)
 	}
 
 	return 0

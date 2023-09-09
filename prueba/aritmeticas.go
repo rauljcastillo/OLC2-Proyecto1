@@ -1,7 +1,6 @@
 package prueba
 
 import (
-	"fmt"
 	"main/parser"
 )
 
@@ -30,8 +29,6 @@ func (v *Visitor) VisitOp(ctx *parser.OpContext, entorno *Ambiente) interface{} 
 				return Valor{val: temp, tipo: dom}
 			}
 			v.Errores = append(v.Errores, Error{mensaje: "No se puede sumar " + Str(l.tipo) + " con " + Str(r.tipo)})
-		case ",":
-			return Valor{val: fmt.Sprint(l.val) + fmt.Sprint(r.val), tipo: STRING}
 		case "+=":
 			if dom == FLOAT {
 				if _, ok := l.val.(float64); !ok {
@@ -188,3 +185,13 @@ func (v *Visitor) VisitOp(ctx *parser.OpContext, entorno *Ambiente) interface{} 
 func (v *Visitor) VisitParen(ctx *parser.ParenContext, entorno *Ambiente) interface{} {
 	return v.Visit(ctx.Expr(), entorno)
 }
+
+/*
+func (v *Visitor) VisitConcat(ctx *parser.ConcatContext, entorno *Ambiente) interface{} {
+	l := v.Visit(ctx.GetLeft(), entorno).(Valor)
+	r := v.Visit(ctx.GetRight(), entorno).(Valor)
+
+	return Valor{val: fmt.Sprint(l.val) + fmt.Sprint(r.val), tipo: STRING}
+
+}
+*/
