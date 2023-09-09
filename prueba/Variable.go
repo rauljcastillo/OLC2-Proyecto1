@@ -1,7 +1,8 @@
 package prueba
 
 type Variable struct {
-	tipo int
-	id   string
-	val  any
+	tipo    int
+	id      string
+	val     any
+	nametem string
 }

@@ -9,6 +9,7 @@ import (
 type Visitor struct {
 	antlr.ParseTreeVisitor
 	Errores []Error
+	Cadena  string
 }
 
 func NewVisitor() *Visitor {
@@ -57,7 +58,38 @@ func (l *Visitor) Visit(tree antlr.ParseTree, entorno *Ambiente) interface{} {
 		return l.VisitPfor(val, entorno)
 	case *parser.PiforContext:
 		return l.VisitPifor(val, entorno)
+	case *parser.PguardContext:
+		return l.VisitPguard(val, entorno)
+	case *parser.PdeclarArrayContext:
+		return l.VisitPdeclarArray(val, entorno)
+	case *parser.PdefinitionContext:
+		return l.VisitPdefinition(val, entorno)
+	case *parser.PespecialContext:
+		return l.VisitPespecial(val, entorno)
+	case *parser.EspecialContext:
+		return l.VisitEspecial(val, entorno)
+	case *parser.PfuncionContext:
+		return l.VisitPfuncion(val, entorno)
+	case *parser.PllamadaContext:
+		return l.VisitPllamada(val, entorno)
+	case *parser.PparamsContext:
+		return l.VisitPparams(val, entorno)
+	case *parser.PargumentsContext:
+		return l.VisitParguments(val, entorno)
+	case *parser.PargumContext:
+		return l.VisitPargum(val, entorno)
+	case *parser.PparametContext:
+		return l.VisitPparamet(val, entorno)
+	case *parser.PasignAContext:
+		return l.VisitPasignA(val, entorno)
+	case *parser.AccesoAContext:
+		return l.VisitAccesoA(val, entorno)
+	case *parser.LlamadaContext:
+		return l.VisitLlamada(val, entorno)
+	case *parser.PreturnContext:
+		return l.VisitPreturn(val, entorno)
 	}
+
 	return Valor{val: int64(0), tipo: INT}
 }
 
@@ -66,13 +98,18 @@ func (l *Visitor) VisitS(ctx *parser.SContext, entorno *Ambiente) interface{} {
 }
 
 func (l *Visitor) VisitBlock(ctx *parser.BlockContext, entorno *Ambiente) interface{} {
-	valor := ""
-	for i := 0; i < ctx.GetChildCount(); i++ {
-		if val, ok := l.Visit(ctx.Production(i), entorno).(string); ok {
-			valor += val
+	for i := 0; ctx.Production(i) != nil; i++ {
+		if ctx.Production(i).CONT() != nil {
+			return Sentences{val: CONTINUE}
+		} else if ctx.Production(i).BRK() != nil {
+			return Sentences{val: BRK}
 		}
+		if a, ok := l.Visit(ctx.Production(i), entorno).(Sentences); ok {
+			return a
+		}
+
 	}
-	return valor
+	return 0
 }
 
 func (l *Visitor) VisitProduction(ctx *parser.ProductionContext, entorno *Ambiente) interface{} {
@@ -90,6 +127,20 @@ func (l *Visitor) VisitProduction(ctx *parser.ProductionContext, entorno *Ambien
 		return l.Visit(ctx.Pwhile(), entorno)
 	} else if ctx.Pfor() != nil {
 		return l.Visit(ctx.Pfor(), entorno)
+	} else if ctx.Pguard() != nil {
+		return l.Visit(ctx.Pguard(), entorno)
+	} else if ctx.PdeclarArray() != nil {
+		return l.Visit(ctx.PdeclarArray(), entorno)
+	} else if ctx.Pespecial() != nil {
+		return l.Visit(ctx.Pespecial(), entorno)
+	} else if ctx.Pfuncion() != nil {
+		return l.Visit(ctx.Pfuncion(), entorno)
+	} else if ctx.Pllamada() != nil {
+		return l.Visit(ctx.Pllamada(), entorno)
+	} else if ctx.PasignA() != nil {
+		return l.Visit(ctx.PasignA(), entorno)
+	} else if ctx.Preturn() != nil {
+		return l.Visit(ctx.Preturn(), entorno)
 	}
 	return 0
 }

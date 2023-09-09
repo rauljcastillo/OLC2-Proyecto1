@@ -24,12 +24,28 @@ func (s *ErrorListener) SyntaxError(recognizer antlr.Recognizer, offendingSymbol
 }
 
 func main() {
+	/*
+		exp := `
+		func Nuevo(_ a: Int, num2 b: Int) {
+			print(a)
+			print(b)
+		}
+
+		Nuevo(2,num2: 3);
+		`
+	*/
 	expresion := `
-	for c in 1...10{
-		if c==9{
-			print("Soy 9 xdxd")
+	func ackermanPuntosMenos(_ m: Int , _ n:Int)->Int {
+		if (m == 0) {
+			return n + 1
+		} else if (m > 0 && n == 0) {
+			return ackermanPuntosMenos(m - 1, 1)
+		} else {
+			return ackermanPuntosMenos(m - 1, ackermanPuntosMenos(m, n - 1))
 		}
 	}
+
+	ackermanPuntosMenos(3,1,ackermanPuntosMenos(3,1))
 	`
 
 	is := antlr.NewInputStream(expresion)
@@ -45,8 +61,8 @@ func main() {
 	if !tt.foundError {
 		global := prueba.NewAmbiente(nil)
 
-		result := visitor.Visit(tree, global)
-		fmt.Println(result)
+		visitor.Visit(tree, global)
+		fmt.Println(visitor.Cadena)
 	}
 	if len(visitor.Errores) > 0 {
 		for _, val := range visitor.Errores {

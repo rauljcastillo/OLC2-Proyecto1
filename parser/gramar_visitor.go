@@ -17,6 +17,39 @@ type GramarVisitor interface {
 	// Visit a parse tree produced by GramarParser#production.
 	VisitProduction(ctx *ProductionContext) interface{}
 
+	// Visit a parse tree produced by GramarParser#preturn.
+	VisitPreturn(ctx *PreturnContext) interface{}
+
+	// Visit a parse tree produced by GramarParser#pasignA.
+	VisitPasignA(ctx *PasignAContext) interface{}
+
+	// Visit a parse tree produced by GramarParser#pfuncion.
+	VisitPfuncion(ctx *PfuncionContext) interface{}
+
+	// Visit a parse tree produced by GramarParser#pllamada.
+	VisitPllamada(ctx *PllamadaContext) interface{}
+
+	// Visit a parse tree produced by GramarParser#parguments.
+	VisitParguments(ctx *PargumentsContext) interface{}
+
+	// Visit a parse tree produced by GramarParser#pargum.
+	VisitPargum(ctx *PargumContext) interface{}
+
+	// Visit a parse tree produced by GramarParser#pparams.
+	VisitPparams(ctx *PparamsContext) interface{}
+
+	// Visit a parse tree produced by GramarParser#pparamet.
+	VisitPparamet(ctx *PparametContext) interface{}
+
+	// Visit a parse tree produced by GramarParser#pdeclarArray.
+	VisitPdeclarArray(ctx *PdeclarArrayContext) interface{}
+
+	// Visit a parse tree produced by GramarParser#pdefinition.
+	VisitPdefinition(ctx *PdefinitionContext) interface{}
+
+	// Visit a parse tree produced by GramarParser#pguard.
+	VisitPguard(ctx *PguardContext) interface{}
+
 	// Visit a parse tree produced by GramarParser#pfor.
 	VisitPfor(ctx *PforContext) interface{}
 
@@ -56,14 +89,26 @@ type GramarVisitor interface {
 	// Visit a parse tree produced by GramarParser#tipo.
 	VisitTipo(ctx *TipoContext) interface{}
 
+	// Visit a parse tree produced by GramarParser#pespecial.
+	VisitPespecial(ctx *PespecialContext) interface{}
+
 	// Visit a parse tree produced by GramarParser#Op.
 	VisitOp(ctx *OpContext) interface{}
+
+	// Visit a parse tree produced by GramarParser#llamada.
+	VisitLlamada(ctx *LlamadaContext) interface{}
+
+	// Visit a parse tree produced by GramarParser#AccesoA.
+	VisitAccesoA(ctx *AccesoAContext) interface{}
 
 	// Visit a parse tree produced by GramarParser#Literal.
 	VisitLiteral(ctx *LiteralContext) interface{}
 
 	// Visit a parse tree produced by GramarParser#Acceso.
 	VisitAcceso(ctx *AccesoContext) interface{}
+
+	// Visit a parse tree produced by GramarParser#Especial.
+	VisitEspecial(ctx *EspecialContext) interface{}
 
 	// Visit a parse tree produced by GramarParser#Paren.
 	VisitParen(ctx *ParenContext) interface{}

@@ -3,12 +3,15 @@ package prueba
 import "main/parser"
 
 func (l *Visitor) VisitPwhile(ctx *parser.PwhileContext, entorno *Ambiente) interface{} {
-	exp := l.Visit(ctx.Expr(), entorno).(Valor)
-	valor := ""
+	nuevoAmb := NewAmbiente(entorno)
+	exp := l.Visit(ctx.Expr(), nuevoAmb).(Valor)
 	for exp.val.(bool) {
-		valor += l.Visit(ctx.Stmt(), entorno).(string)
-		exp = l.Visit(ctx.Expr(), entorno).(Valor)
+		a := l.Visit(ctx.Block(), nuevoAmb).(Sentences)
+		if a.val == BRK {
+			break
+		}
+		exp = l.Visit(ctx.Expr(), nuevoAmb).(Valor)
 	}
 
-	return valor
+	return 0
 }

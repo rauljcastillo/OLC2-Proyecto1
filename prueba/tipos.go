@@ -5,6 +5,11 @@ const (
 	FLOAT
 	INT
 	BOOL
+	CHAR
+	RTN
+	BRK
+	CONTINUE
+	VOID
 )
 
 func Str(tipo int) string {
@@ -19,4 +24,24 @@ func Str(tipo int) string {
 		return "Bool"
 	}
 	return ""
+}
+
+func Num(tipo string) int {
+	switch tipo {
+	case "break":
+		return BRK
+	case "continue":
+		return CONTINUE
+	case "return":
+		return RTN
+	case "Float":
+		return FLOAT
+	case "Int":
+		return INT
+	case "String":
+		return STRING
+	case "Bool":
+		return BOOL
+	}
+	return 0
 }

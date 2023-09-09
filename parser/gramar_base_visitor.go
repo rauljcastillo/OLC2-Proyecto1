@@ -20,6 +20,50 @@ func (v *BaseGramarVisitor) VisitProduction(ctx *ProductionContext) interface{} 
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseGramarVisitor) VisitPreturn(ctx *PreturnContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseGramarVisitor) VisitPasignA(ctx *PasignAContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseGramarVisitor) VisitPfuncion(ctx *PfuncionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseGramarVisitor) VisitPllamada(ctx *PllamadaContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseGramarVisitor) VisitParguments(ctx *PargumentsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseGramarVisitor) VisitPargum(ctx *PargumContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseGramarVisitor) VisitPparams(ctx *PparamsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseGramarVisitor) VisitPparamet(ctx *PparametContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseGramarVisitor) VisitPdeclarArray(ctx *PdeclarArrayContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseGramarVisitor) VisitPdefinition(ctx *PdefinitionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseGramarVisitor) VisitPguard(ctx *PguardContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseGramarVisitor) VisitPfor(ctx *PforContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -72,7 +116,19 @@ func (v *BaseGramarVisitor) VisitTipo(ctx *TipoContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseGramarVisitor) VisitPespecial(ctx *PespecialContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseGramarVisitor) VisitOp(ctx *OpContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseGramarVisitor) VisitLlamada(ctx *LlamadaContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseGramarVisitor) VisitAccesoA(ctx *AccesoAContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -81,6 +137,10 @@ func (v *BaseGramarVisitor) VisitLiteral(ctx *LiteralContext) interface{} {
 }
 
 func (v *BaseGramarVisitor) VisitAcceso(ctx *AccesoContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseGramarVisitor) VisitEspecial(ctx *EspecialContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

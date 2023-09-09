@@ -20,27 +20,25 @@ func (l *Visitor) VisitTipo(ctx *parser.TipoContext) interface{} {
 func (l *Visitor) VisitDeclara(ctx *parser.DeclaraContext, entorno *Ambiente) interface{} {
 
 	if ctx.Tipo() != nil && ctx.Expr() != nil {
-		tipe := l.Visit(ctx.Tipo(), entorno).(int)     //Tipo de la variable
-		expres := l.Visit(ctx.Expr(), entorno).(Valor) //Tipo del valor se guarda
-		if expres.val != nil {
-			if tipe == expres.tipo {
-				entorno.save(tipe, ctx.ID().GetText(), expres.val)
-			} else if tipe == FLOAT && expres.tipo == INT {
-				entorno.save(tipe, ctx.ID().GetText(), float64(expres.val.(int64)))
+		tipe := Num(ctx.Tipo().GetText()) //Tipo de la variable
+		if exp, ok := l.Visit(ctx.Expr(), entorno).(Valor); ok {
+			if tipe == exp.tipo {
+				entorno.save(tipe, ctx.ID().GetText(), exp.val, "")
+			} else if tipe == FLOAT && exp.tipo == INT {
+				entorno.save(tipe, ctx.ID().GetText(), float64(exp.val.(int64)), "")
 
 			} else {
-				l.Errores = append(l.Errores, Error{mensaje: "No se puede asignar " + Str(expres.tipo) + " con " + Str(tipe)})
+				l.Errores = append(l.Errores, Error{mensaje: "No se puede asignar " + Str(exp.tipo) + " con " + Str(tipe)})
 			}
 		}
 
 	} else if ctx.Expr() == nil && ctx.Tipo() != nil {
-		tipo := l.Visit(ctx.Tipo(), entorno).(int)
-		entorno.save(tipo, ctx.ID().GetText(), nil)
+		tipo := Num(ctx.Tipo().GetText())
+		entorno.save(tipo, ctx.ID().GetText(), nil, "")
 
 	} else if ctx.Tipo() == nil {
-		exp := l.Visit(ctx.Expr(), entorno).(Valor)
-		if exp.val != nil {
-			entorno.save(exp.tipo, ctx.ID().GetText(), exp.val)
+		if exp, ok := l.Visit(ctx.Expr(), entorno).(Valor); ok {
+			entorno.save(exp.tipo, ctx.ID().GetText(), exp.val, "")
 		}
 	}
 
